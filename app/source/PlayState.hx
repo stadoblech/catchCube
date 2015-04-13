@@ -8,6 +8,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import flixel.util.FlxColor;
+import flixel.addons.display.FlxStarField.FlxStarField2D;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -21,9 +22,16 @@ class PlayState extends FlxState
 	var greenTower:Tower;
 	var blueTower:Tower;
 	
+	var starfield:FlxStarField2D;
+	
 	override public function create():Void
 	{
 		super.create();
+		
+		starfield = new FlxStarField2D();
+		starfield.setStarSpeed(10,20);
+		add(starfield);
+		
 		shots = new FlxTypedGroup<Shot>();
 		add(shots);
 		
@@ -38,6 +46,8 @@ class PlayState extends FlxState
 		
 		enemiesHandler = new EnemyHandler();
 		add(enemiesHandler);
+		
+		//FlxG.sound.playMusic("assets/music/main_music.ogg");
 	}
 	
 	override public function destroy():Void

@@ -18,6 +18,9 @@ class PlayState extends FlxState
 	var shots:FlxTypedGroup<Shot>;
 	
 	var enemiesHandler:EnemyHandler;
+	
+	var redTowerBot:FlxSprite;
+	
 	var redTower:Tower;
 	var greenTower:Tower;
 	var blueTower:Tower;
@@ -32,6 +35,10 @@ class PlayState extends FlxState
 		starfield = new FlxStarField2D();
 		starfield.setStarSpeed(1,2);
 		add(starfield);
+		
+		redTowerBot = new FlxSprite("assets/images/docks/red_bot.png");
+		redTowerBot.setPosition(FlxG.width * 0.2 - redTowerBot.width/2, FlxG.height-redTowerBot.height);
+		add(redTowerBot);
 		
 		enemiesHandler = new EnemyHandler();
 		add(enemiesHandler);
@@ -78,7 +85,8 @@ class PlayState extends FlxState
 				
 				if (FlxG.overlap(shot, enemy) && shot.type != enemy.type)
 				{
-					enemiesHandler.enemies.remove(enemy);
+					//enemiesHandler.enemies.remove(enemy);
+					enemy.kill();
 					shots.remove(shot);
 					
 					if (enemy.type == "red")

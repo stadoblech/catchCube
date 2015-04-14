@@ -34,19 +34,19 @@ class Tower extends FlxSprite
 					if (type == "red")
 					{
 						var shot = new Shot(type);
-						shot.setPosition(x + width / 2 - shot.width, y);
+						shot.setPosition(x + width /2 - shot.width/2, y);
 						shots.add(shot);
 					}
 					if (type == "blue")
 					{
 						var shot = new Shot(type);
-						shot.setPosition(x + width / 2 - shot.width, y);
+						shot.setPosition(x + width / 2 - shot.width/2, y);
 						shots.add(shot);
 					}
 					if (type == "green")
 					{
 						var shot = new Shot(type);
-						shot.setPosition(x + width / 2 - shot.width, y);
+						shot.setPosition(x + width / 2 - shot.width/2, y);
 						shots.add(shot);
 					}
 					
@@ -60,7 +60,7 @@ class Tower extends FlxSprite
 		if (FlxG.keys.justPressed.A && type == "red")
 		{
 			var shot = new Shot(type);
-			shot.setPosition(x + width/2 - shot.width,y);
+			shot.setPosition(x + width/2 - shot.width/2,y);
 			shots.add(shot);
 		}
 		if (FlxG.keys.justPressed.S && type == "green")

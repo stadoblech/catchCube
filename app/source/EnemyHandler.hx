@@ -32,10 +32,14 @@ class EnemyHandler extends FlxGroup
 	
 	var minRespawn:Float = 1.7;
 	var maxRespawn:Float = 2.8;
+	
+	var lifespan:Float = 1;
+	
 	public function new() 
 	{
 		super();
 		enemies = new FlxTypedGroup<Enemy>();
+		enemies.maxSize = 6;
 		add(enemies);
 		createLanes();
 	}
@@ -44,6 +48,20 @@ class EnemyHandler extends FlxGroup
 	{
 		super.update();
 		updateLanes();
+		
+		for (enemy in enemies)
+		{
+			if (!enemy.alive)
+			{
+				lifespan -= FlxG.elapsed;
+				if (lifespan < 0)
+				{
+					enemies.remove(enemy);
+				}
+			}
+			
+			
+		}
 	}
 	
 	private function createLanes():Void
@@ -71,19 +89,26 @@ class EnemyHandler extends FlxGroup
 		
 		if (leftLane.respawnTime <= 0)
 		{
-			enemies.add(new Enemy(leftLane.position));
+			var enemy = new Enemy(leftLane.position);
+			add(enemy.gibs);
+			enemies.add(enemy);
+			//enemies.add(new Enemy(leftLane.position));
 			leftLane.respawnTime = FlxRandom.floatRanged(minRespawn, maxRespawn);
 		}
 		
 		if (rightLane.respawnTime <= 0)
 		{
-			enemies.add(new Enemy(rightLane.position));
+			var enemy = new Enemy(rightLane.position);
+			add(enemy.gibs);
+			enemies.add(enemy);
 			rightLane.respawnTime = FlxRandom.floatRanged(minRespawn, maxRespawn);
 		}
 		
 		if (midLane.respawnTime <= 0)
 		{
-			enemies.add(new Enemy(midLane.position));
+			var enemy = new Enemy(midLane.position);
+			add(enemy.gibs);
+			enemies.add(enemy);
 			midLane.respawnTime = FlxRandom.floatRanged(minRespawn, maxRespawn);
 		}
 	}

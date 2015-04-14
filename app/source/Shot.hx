@@ -35,7 +35,7 @@ class Shot extends FlxSprite
 	override public function update():Void 
 	{
 		super.update();
-		y -= 5;
+		y -= 10;
 	}
 	
 }

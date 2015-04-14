@@ -13,7 +13,7 @@ class RedTower extends Tower
 	{
 		super(shots);
 		//makeGraphic(100,100,FlxColor.RED);
-		loadGraphic("assets/images/docks/red.png");
+		loadGraphic("assets/images/docks/red_top.png");
 		setPosition(FlxG.width * 0.2 - this.width / 2, FlxG.height-height);	
 		
 		type = "red";

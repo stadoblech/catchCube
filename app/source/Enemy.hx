@@ -23,7 +23,7 @@ class Enemy extends FlxSprite
 			case 0:
 				type = "red";
 				//makeGraphic(100, 100, FlxColor.RED);
-				loadGraphic("assets/images/ships/red.png");
+				loadGraphic("assets/images/ships/red_test.png");
 				//angle += 180;
 			case 1:
 				type = "green";

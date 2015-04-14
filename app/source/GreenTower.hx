@@ -13,9 +13,8 @@ class GreenTower extends Tower
 	{
 		super(shots);
 		//makeGraphic(100,100,FlxColor.GREEN);
-		loadGraphic("assets/images/docks/green.png");
-		setPosition(FlxG.width / 2 - this.width / 2, FlxG.height-height);	
-		
+		loadGraphic("assets/images/docks/green_top.png");
+		setPosition(FlxG.width / 2 - this.width / 2, FlxG.height-height);
 		type = "green";
 	}
 	

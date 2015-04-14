@@ -20,6 +20,8 @@ class PlayState extends FlxState
 	var enemiesHandler:EnemyHandler;
 	
 	var redTowerBot:FlxSprite;
+	var greenTowerBot:FlxSprite;
+	var blueTowerBot:FlxSprite;
 	
 	var redTower:Tower;
 	var greenTower:Tower;
@@ -36,9 +38,17 @@ class PlayState extends FlxState
 		starfield.setStarSpeed(1,2);
 		add(starfield);
 		
-		redTowerBot = new FlxSprite("assets/images/docks/red_bot.png");
+		redTowerBot = new FlxSprite("assets/images/docks/bot.png");
 		redTowerBot.setPosition(FlxG.width * 0.2 - redTowerBot.width/2, FlxG.height-redTowerBot.height);
 		add(redTowerBot);
+		
+		greenTowerBot = new FlxSprite("assets/images/docks/bot.png");	
+		greenTowerBot.setPosition(FlxG.width / 2 - greenTowerBot.width / 2, FlxG.height-greenTowerBot.height);
+		add(greenTowerBot);
+		
+		blueTowerBot = new FlxSprite("assets/images/docks/bot.png");
+		blueTowerBot.setPosition(FlxG.width * 0.8 - blueTowerBot.width / 2, FlxG.height - blueTowerBot.height);
+		add(blueTowerBot);
 		
 		enemiesHandler = new EnemyHandler();
 		add(enemiesHandler);

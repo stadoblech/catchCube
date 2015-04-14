@@ -13,7 +13,7 @@ class BlueTower extends Tower
 	{
 		super(shots);
 		//makeGraphic(100,100,FlxColor.BLUE);
-		loadGraphic("assets/images/docks/blue.png");
+		loadGraphic("assets/images/docks/blue_top.png");
 		setPosition(FlxG.width * 0.8 - this.width / 2, FlxG.height-height);	
 		
 		type = "blue";

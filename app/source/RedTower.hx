@@ -12,8 +12,9 @@ class RedTower extends Tower
 	public function new(shots:FlxTypedGroup<Shot>) 
 	{
 		super(shots);
-		makeGraphic(100,100,FlxColor.RED);
-		setPosition(FlxG.width * 0.2 - this.width / 2, FlxG.height * 0.8);	
+		//makeGraphic(100,100,FlxColor.RED);
+		loadGraphic("assets/images/docks/red.png");
+		setPosition(FlxG.width * 0.2 - this.width / 2, FlxG.height-height);	
 		
 		type = "red";
 	}

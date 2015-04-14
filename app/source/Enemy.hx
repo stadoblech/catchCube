@@ -22,15 +22,17 @@ class Enemy extends FlxSprite
 		{
 			case 0:
 				type = "red";
-				makeGraphic(100, 100, FlxColor.RED);
-				//loadGraphic("assets/images/ships/test.png");
-				angle += 180;
+				//makeGraphic(100, 100, FlxColor.RED);
+				loadGraphic("assets/images/ships/red.png");
+				//angle += 180;
 			case 1:
 				type = "green";
-				makeGraphic(100, 100, FlxColor.GREEN);
+				//makeGraphic(100, 100, FlxColor.GREEN);
+				loadGraphic("assets/images/ships/green.png");
 			case 2:
 				type = "blue";
-				makeGraphic(100, 100, FlxColor.BLUE);
+				//makeGraphic(100, 100, FlxColor.BLUE);
+				loadGraphic("assets/images/ships/blue.png");
 			case 3:
 				type = "neutral";
 				makeGraphic(100, 100, FlxColor.GRAY);

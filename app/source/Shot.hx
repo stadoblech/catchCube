@@ -16,15 +16,18 @@ class Shot extends FlxSprite
 		
 		if (type == "red")
 		{
-			makeGraphic(10, 10,FlxColor.RED);
+			//makeGraphic(10, 10,FlxColor.RED);
+			loadGraphic("assets/images/missiles/red.png");
 		}
 		if (type == "green")
 		{
-			makeGraphic(10, 10,FlxColor.GREEN);
+			//makeGraphic(10, 10, FlxColor.GREEN);
+			loadGraphic("assets/images/missiles/green.png");
 		}
 		if (type == "blue")
 		{
-			makeGraphic(10, 10,FlxColor.BLUE);
+			//makeGraphic(10, 10, FlxColor.BLUE);
+			loadGraphic("assets/images/missiles/blue.png");
 		}
 		
 	}

@@ -28,9 +28,13 @@ class PlayState extends FlxState
 	{
 		super.create();
 		
+		
 		starfield = new FlxStarField2D();
-		starfield.setStarSpeed(10,20);
+		starfield.setStarSpeed(1,2);
 		add(starfield);
+		
+		enemiesHandler = new EnemyHandler();
+		add(enemiesHandler);
 		
 		shots = new FlxTypedGroup<Shot>();
 		add(shots);
@@ -44,8 +48,7 @@ class PlayState extends FlxState
 		blueTower = new BlueTower(shots);
 		add(blueTower);
 		
-		enemiesHandler = new EnemyHandler();
-		add(enemiesHandler);
+		
 		
 		//FlxG.sound.playMusic("assets/music/main_music.ogg");
 	}

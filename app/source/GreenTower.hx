@@ -12,8 +12,9 @@ class GreenTower extends Tower
 	public function new(shots:FlxTypedGroup<Shot>) 
 	{
 		super(shots);
-		makeGraphic(100,100,FlxColor.GREEN);
-		setPosition(FlxG.width / 2 - this.width / 2, FlxG.height * 0.8);	
+		//makeGraphic(100,100,FlxColor.GREEN);
+		loadGraphic("assets/images/docks/green.png");
+		setPosition(FlxG.width / 2 - this.width / 2, FlxG.height-height);	
 		
 		type = "green";
 	}

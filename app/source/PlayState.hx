@@ -101,14 +101,17 @@ class PlayState extends FlxState
 				{
 					if (enemy.type == "red")
 					{
+						enemiesHandler.destroyedLeft();
 						Statistics.redLanded++;
 					}
 					if (enemy.type == "green")
 					{
+						enemiesHandler.destroyedMid();
 						Statistics.greenLanded++;
 					}
 					if (enemy.type == "blue")
 					{
+						enemiesHandler.destroyedRight();
 						Statistics.blueLanded++;
 					}
 					

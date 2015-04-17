@@ -31,21 +31,27 @@ class Enemy extends FlxSprite
 		
 		createGibs();
 		
+		
+		
 		switch(enemyType)
 		{
 			case 0:
 				type = "red";
-				loadGraphic("assets/images/ships/red.png");
+				loadGraphic("assets/images/ships/red.png",true);
 			case 1:
 				type = "green";
-				loadGraphic("assets/images/ships/green.png");
+				loadGraphic("assets/images/ships/green.png", true);
+				
 			case 2:
 				type = "blue";
-				loadGraphic("assets/images/ships/blue.png");
+				loadGraphic("assets/images/ships/blue.png",true);
 			case 3:
 				type = "neutral";
 				makeGraphic(100, 100, FlxColor.GRAY);
 		}
+		
+		animation.add("thrust", [0, 1], 15,true);
+		animation.play("thrust");
 	}
 	
 	override public function update():Void 
@@ -69,6 +75,6 @@ class Enemy extends FlxSprite
 		gibs.setRotation( -FlxRandom.intRanged(180,720), -FlxRandom.intRanged(180,720));
 		gibs.gravity = 0;
 		gibs.bounce = 1;
-		gibs.makeParticles("assets/images/ships/gibs.png", 35, 16, false, 0);
+		gibs.makeParticles("assets/images/ships/gibs.png", 35, 16,true, 0);
 	}
 }

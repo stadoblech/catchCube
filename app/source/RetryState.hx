@@ -11,12 +11,17 @@ class RetryState extends FlxSubState
 {
 	var againText:FlxText;
 	
-	public function new() 
+	public function new(boarded:Bool,survived:Int) 
 	{
 		super();
 		againText = new FlxText();
-		againText.setFormat("assets/fonts/orbitron.otf", 25, FlxColor.WHITE,"center");
-		againText.text = "TODO : you have been boarded\nor friendly fire";
+		againText.setFormat("assets/fonts/orbitron.otf", 25, FlxColor.WHITE, "center");
+		if (boarded)
+		{
+			againText.text = "you have been boarded\n"+survived;
+		}else
+			againText.text = "friendly fire\n"+survived;
+		
 		againText.setPosition(0,400);
 		add(againText);
 	}

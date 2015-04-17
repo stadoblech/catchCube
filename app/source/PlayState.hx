@@ -29,24 +29,36 @@ class PlayState extends FlxState
 	
 	var starfield:FlxStarField2D;
 	
+	var timer:Float = 0;
+	
 	override public function create():Void
 	{
 		super.create();
 		
 		
 		starfield = new FlxStarField2D();
-		starfield.setStarSpeed(1,2);
+		starfield.setStarSpeed(1, 2);
 		add(starfield);
 		
-		redTowerBot = new FlxSprite("assets/images/docks/bot.png");
-		redTowerBot.setPosition(FlxG.width * 0.2 - redTowerBot.width/2, FlxG.height-redTowerBot.height);
+		redTowerBot = new FlxSprite();
+		redTowerBot.loadGraphic("assets/images/docks/bot_animated.png", true);
+		redTowerBot.animation.add("dock", [0, 1, 2, 3, 4], 5, true);
+		redTowerBot.animation.play("dock");
+		redTowerBot.setPosition(FlxG.width * 0.2 - redTowerBot.width / 2, FlxG.height - redTowerBot.height);
 		add(redTowerBot);
 		
-		greenTowerBot = new FlxSprite("assets/images/docks/bot.png");	
+		
+		greenTowerBot = new FlxSprite();	
+		greenTowerBot.loadGraphic("assets/images/docks/bot_animated.png", true);
+		greenTowerBot.animation.add("dock", [0, 1, 2, 3, 4], 5, true);
+		greenTowerBot.animation.play("dock");
 		greenTowerBot.setPosition(FlxG.width / 2 - greenTowerBot.width / 2, FlxG.height-greenTowerBot.height);
 		add(greenTowerBot);
 		
-		blueTowerBot = new FlxSprite("assets/images/docks/bot.png");
+		blueTowerBot = new FlxSprite();
+		blueTowerBot.loadGraphic("assets/images/docks/bot_animated.png", true);
+		blueTowerBot.animation.add("dock", [0, 1, 2, 3, 4], 5, true);
+		blueTowerBot.animation.play("dock");
 		blueTowerBot.setPosition(FlxG.width * 0.8 - blueTowerBot.width / 2, FlxG.height - blueTowerBot.height);
 		add(blueTowerBot);
 		
@@ -64,10 +76,6 @@ class PlayState extends FlxState
 		
 		blueTower = new BlueTower(shots);
 		add(blueTower);
-		
-		
-		
-		//FlxG.sound.playMusic("assets/music/main_music.ogg");
 	}
 	
 	override public function destroy():Void
@@ -79,6 +87,7 @@ class PlayState extends FlxState
 	{
 		super.update();
 		
+		timer += FlxG.elapsed;
 		for (shot in shots)
 		{
 			if (shot.y <= 0)
@@ -90,18 +99,31 @@ class PlayState extends FlxState
 			{
 				if(enemy.y > FlxG.height)
 				{
+					if (enemy.type == "red")
+					{
+						Statistics.redLanded++;
+					}
+					if (enemy.type == "green")
+					{
+						Statistics.greenLanded++;
+					}
+					if (enemy.type == "blue")
+					{
+						Statistics.blueLanded++;
+					}
+					
 					enemiesHandler.enemies.remove(enemy);
 				}
 				
 				if (FlxG.overlap(shot, enemy) && shot.type != enemy.type)
 				{
-					//enemiesHandler.enemies.remove(enemy);
 					enemy.kill();
 					shots.remove(shot);
 					
 					if (enemy.type == "red")
 					{
 						enemiesHandler.destroyedLeft();
+						Statistics.shipsDestroyed++;
 					}
 					
 					if (enemy.type == "green")
@@ -116,9 +138,8 @@ class PlayState extends FlxState
 				}
 				if (FlxG.overlap(shot, enemy) && shot.type == enemy.type)
 				{
-					enemiesHandler.enemies.clear();
-					shots.clear();
-					openSubState(new RetryState());
+					openSubState(new RetryState(false, Std.int(timer)));
+					restartGame();
 				}
 			}
 		}
@@ -127,25 +148,33 @@ class PlayState extends FlxState
 		{
 			if (FlxG.overlap(redTower, enemy) && redTower.type != enemy.type)
 				{
-					enemiesHandler.enemies.clear();
-					shots.clear();
-					openSubState(new RetryState());
+					openSubState(new RetryState(true, Std.int(timer)));
+					restartGame();
 				}
 				
 				if (FlxG.overlap(greenTower, enemy) && greenTower.type != enemy.type)
 				{
-					enemiesHandler.enemies.clear();
-					shots.clear();
-					openSubState(new RetryState());
+					openSubState(new RetryState(true, Std.int(timer)));
+					restartGame();
 				}
 				
 				if (FlxG.overlap(blueTower, enemy) && blueTower.type != enemy.type)
 				{
-					enemiesHandler.enemies.clear();
-					shots.clear();
-					openSubState(new RetryState());
+					openSubState(new RetryState(true, Std.int(timer)));
+					restartGame();
 				}
 		}
+	}
+	
+	function restartGame():Void
+	{
+		enemiesHandler.enemies.clear();
+		shots.clear();
+		timer = 0;
+		Statistics.redLanded = 0;
+		Statistics.blueLanded = 0;
+		Statistics.greenLanded = 0;
+		Statistics.shipsDestroyed = 0;
 	}
 	
 	

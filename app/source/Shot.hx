@@ -14,6 +14,7 @@ class Shot extends FlxSprite
 		super(x, y);
 		type = _type;
 		
+		/*
 		if (type == "red")
 		{
 			//makeGraphic(10, 10,FlxColor.RED);
@@ -29,6 +30,8 @@ class Shot extends FlxSprite
 			//makeGraphic(10, 10, FlxColor.BLUE);
 			loadGraphic("assets/images/missiles/blue.png");
 		}
+		*/
+		loadGraphic("assets/images/missiles/missile.png");
 		
 	}
 	

@@ -1,4 +1,5 @@
 package ;
+import flixel.addons.display.FlxStarField.FlxStarField2D;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.text.FlxText;
@@ -10,7 +11,7 @@ import flixel.util.FlxColor;
 class InstructionState extends FlxState
 {
 	var instructionText:FlxText;
-	
+	var starfield:FlxStarField2D;
 	public function new() 
 	{
 		super();
@@ -20,12 +21,16 @@ class InstructionState extends FlxState
 	override public function create():Void 
 	{
 		super.create();
-		FlxG.sound.playMusic("assets/music/main_music.ogg");
+		
+		starfield = new FlxStarField2D();
+		starfield.setStarSpeed(1, 20);
+		starfield.setStarDepthColors(20, FlxColor.SILVER, FlxColor.GRAY);
+		add(starfield);
 		
 		instructionText = new FlxText();
-		instructionText.setFormat("assets/fonts/orbitron.otf", 25, FlxColor.WHITE, "center");
-		instructionText.text = "Instructions :\ntouch towers to shoot\nshoot not matching color ships\ncarefull for friendly fire\ndont let wrong ship dock";
-		instructionText.setPosition(0,400);
+		instructionText.setFormat(Reg.gameFont, 20, FlxColor.WHITE, "center");
+		instructionText.text = "Instructions :\n\ntouch towers to shoot\n\nshoot not matching color ships\n\ncarefull for friendly fire\n\ndont let wrong ship dock";
+		instructionText.setPosition(FlxG.width/2 - instructionText.fieldWidth/2, FlxG.height * 0.4);
 		add(instructionText);
 	}
 	
@@ -35,7 +40,7 @@ class InstructionState extends FlxState
 		
 		if (FlxG.mouse.justPressed)
 		{
-			FlxG.switchState(new PlayState());
+			FlxG.switchState(new MenuState());
 		}
 	}
 }

@@ -34,4 +34,7 @@ class Reg
 	 * Especially useful for setting up multiple save slots.
 	 */
 	public static var saves:Array<FlxSave> = [];
+	
+	public static var gameFont:String = "assets/fonts/Petitinho.ttf";
+	public static var SAVE_DATA:String = "SCORE";
 }

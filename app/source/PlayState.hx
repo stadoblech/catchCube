@@ -37,30 +37,11 @@ class PlayState extends FlxState
 		
 		
 		starfield = new FlxStarField2D();
-		starfield.setStarSpeed(1, 2);
+		starfield.setStarSpeed(1, 20);
+		starfield.setStarDepthColors(20, FlxColor.SILVER, FlxColor.GRAY);
 		add(starfield);
 		
-		redTowerBot = new FlxSprite();
-		redTowerBot.loadGraphic("assets/images/docks/bot_animated.png", true);
-		redTowerBot.animation.add("dock", [0, 1, 2, 3, 4], 5, true);
-		redTowerBot.animation.play("dock");
-		redTowerBot.setPosition(FlxG.width * 0.2 - redTowerBot.width / 2, FlxG.height - redTowerBot.height);
-		add(redTowerBot);
-		
-		
-		greenTowerBot = new FlxSprite();	
-		greenTowerBot.loadGraphic("assets/images/docks/bot_animated.png", true);
-		greenTowerBot.animation.add("dock", [0, 1, 2, 3, 4], 5, true);
-		greenTowerBot.animation.play("dock");
-		greenTowerBot.setPosition(FlxG.width / 2 - greenTowerBot.width / 2, FlxG.height-greenTowerBot.height);
-		add(greenTowerBot);
-		
-		blueTowerBot = new FlxSprite();
-		blueTowerBot.loadGraphic("assets/images/docks/bot_animated.png", true);
-		blueTowerBot.animation.add("dock", [0, 1, 2, 3, 4], 5, true);
-		blueTowerBot.animation.play("dock");
-		blueTowerBot.setPosition(FlxG.width * 0.8 - blueTowerBot.width / 2, FlxG.height - blueTowerBot.height);
-		add(blueTowerBot);
+		loadBottomHangars();
 		
 		enemiesHandler = new EnemyHandler();
 		add(enemiesHandler);
@@ -76,6 +57,10 @@ class PlayState extends FlxState
 		
 		blueTower = new BlueTower(shots);
 		add(blueTower);
+		
+		#if android
+		FlxG.android.preventDefaultBackAction = true;
+		#end
 	}
 	
 	override public function destroy():Void
@@ -86,6 +71,13 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		super.update();
+		
+		#if android
+		if (FlxG.android.justPressed("BACK"))
+		{
+			FlxG.switchState(new MenuState());
+		}
+		#end
 		
 		timer += FlxG.elapsed;
 		for (shot in shots)
@@ -132,11 +124,13 @@ class PlayState extends FlxState
 					if (enemy.type == "green")
 					{
 						enemiesHandler.destroyedMid();
+						Statistics.shipsDestroyed++;
 					}
 					
 					if (enemy.type == "blue")
 					{
 						enemiesHandler.destroyedRight();
+						Statistics.shipsDestroyed++;
 					}
 				}
 				if (FlxG.overlap(shot, enemy) && shot.type == enemy.type)
@@ -179,6 +173,32 @@ class PlayState extends FlxState
 		Statistics.greenLanded = 0;
 		Statistics.shipsDestroyed = 0;
 	}
+	
+	function loadBottomHangars():Void
+	{
+		redTowerBot = new FlxSprite();
+		redTowerBot.loadGraphic("assets/images/docks/bot_animated.png", true);
+		redTowerBot.animation.add("dock", [0, 1, 2, 3, 4], 5, true);
+		redTowerBot.animation.play("dock");
+		redTowerBot.setPosition(FlxG.width * 0.2 - redTowerBot.width / 2, FlxG.height - redTowerBot.height);
+		add(redTowerBot);
+		
+		
+		greenTowerBot = new FlxSprite();	
+		greenTowerBot.loadGraphic("assets/images/docks/bot_animated.png", true);
+		greenTowerBot.animation.add("dock", [0, 1, 2, 3, 4], 5, true);
+		greenTowerBot.animation.play("dock");
+		greenTowerBot.setPosition(FlxG.width / 2 - greenTowerBot.width / 2, FlxG.height-greenTowerBot.height);
+		add(greenTowerBot);
+		
+		blueTowerBot = new FlxSprite();
+		blueTowerBot.loadGraphic("assets/images/docks/bot_animated.png", true);
+		blueTowerBot.animation.add("dock", [0, 1, 2, 3, 4], 5, true);
+		blueTowerBot.animation.play("dock");
+		blueTowerBot.setPosition(FlxG.width * 0.8 - blueTowerBot.width / 2, FlxG.height - blueTowerBot.height);
+		add(blueTowerBot);
+	}
+	
 	
 	
 }
